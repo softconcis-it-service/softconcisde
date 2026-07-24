@@ -1,0 +1,74 @@
+/* Softconcis Consent Manager */
+.scc-root { position: fixed; inset: 0; z-index: 999999; display: flex; align-items: flex-start; justify-content: center; opacity: 0; visibility: hidden; transition: opacity .28s ease, visibility 0s linear .28s; }
+.scc-root.scc-open { opacity: 1; visibility: visible; transition: opacity .28s ease; }
+.scc-backdrop { position: absolute; inset: 0; background: rgba(20, 22, 23, .6); }
+.scc-dialog { position: relative; background: #fff; color: #434549; max-width: 640px; width: calc(100% - 32px); margin-top: 6vh; border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,.35); font-size: 14px; line-height: 1.55; display: flex; flex-direction: column; max-height: 86vh; opacity: 0; transform: translateY(-14px) scale(.98); transition: opacity .3s ease, transform .32s cubic-bezier(.16, .84, .44, 1); }
+.scc-root.scc-open .scc-dialog { opacity: 1; transform: none; }
+.scc-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px 12px; border-bottom: 1px solid #e7e9ec; }
+.scc-head h2 { margin: 0; font-size: 18px; color: #212326; }
+.scc-close { background: none; border: 0; font-size: 26px; line-height: 1; cursor: pointer; color: #85878a; padding: 0 2px; }
+.scc-close:hover { color: #212326; }
+.scc-body { padding: 14px 24px; overflow-y: auto; }
+.scc-legal p, .scc-desc { margin: 0 0 10px; }
+.scc-legal a, .scc-links a, .scc-service-info a { color: #86bc25; text-decoration: none; }
+.scc-legal a:hover, .scc-links a:hover, .scc-service-info a:hover, .scc-toggle-info:hover { color: #6d9a1c; text-decoration: underline; }
+.scc-groups { display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: center; padding: 12px 24px 4px; border-top: 1px solid #e7e9ec; }
+.scc-group { display: flex; align-items: center; gap: 7px; cursor: pointer; font-weight: 600; color: #212326; }
+.scc-group input { accent-color: #86bc25; width: 17px; height: 17px; }
+.scc-actions { display: flex; flex-direction: column; gap: 8px; padding: 14px 24px 8px; }
+.scc-btn { display: inline-block; border: 0; border-radius: 4px; padding: 11px 18px; font-size: 14px; font-weight: 600; cursor: pointer; text-align: center; }
+.scc-btn-primary { background: #86bc25; color: #fff; }
+.scc-btn-primary:hover { background: #81ad22; }
+.scc-btn-secondary { background: #f2f3f5; color: #434549; }
+.scc-btn-secondary:hover { background: #e4e6ea; }
+/* Im Consent-Dialog sind alle Auswahl-Buttons gleichwertig (kein Nudging) */
+.scc-dialog .scc-btn-primary, .scc-dialog .scc-btn-secondary { background: #f2f3f5; color: #212326; border: 1px solid #c6c9ce; }
+.scc-dialog .scc-btn-primary:hover, .scc-dialog .scc-btn-secondary:hover { background: #e4e6ea; }
+.scc-btn-link { background: none; color: #86bc25; padding: 8px 6px; }
+.scc-links { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center; padding: 6px 24px 16px; font-size: 12.5px; }
+/* details view */
+.scc-group-section { border-top: 1px solid #e7e9ec; padding: 14px 0 6px; }
+.scc-group-head { display: flex; gap: 14px; align-items: flex-start; }
+.scc-group-head h3 { margin: 0 0 4px; font-size: 15px; color: #212326; }
+.scc-group-head p { margin: 0 0 8px; color: #6a6d71; }
+.scc-switch { position: relative; display: inline-block; width: 44px; height: 24px; flex: 0 0 auto; margin-top: 2px; }
+.scc-switch input { opacity: 0; width: 0; height: 0; }
+.scc-slider { position: absolute; inset: 0; background: #c6c9ce; border-radius: 24px; transition: .2s; cursor: pointer; }
+.scc-slider:before { content: ""; position: absolute; height: 18px; width: 18px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: .2s; }
+.scc-switch input:checked + .scc-slider { background: #86bc25; }
+.scc-switch input:checked + .scc-slider:before { transform: translateX(20px); }
+.scc-switch input:disabled + .scc-slider { opacity: .55; cursor: default; }
+.scc-service-list { margin: 4px 0 8px 58px; }
+.scc-service { border-bottom: 1px dashed #e7e9ec; padding: 7px 0; }
+.scc-service:last-child { border-bottom: 0; }
+.scc-service-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.scc-service-name { font-weight: 600; color: #212326; }
+.scc-toggle-info { font-size: 12.5px; color: #86bc25; text-decoration: none; white-space: nowrap; }
+.scc-service-info { margin-top: 8px; }
+.scc-info-table, .scc-cookie-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 0 0 10px; }
+.scc-info-table th { text-align: left; vertical-align: top; padding: 5px 10px 5px 0; width: 34%; color: #6a6d71; font-weight: 600; }
+.scc-info-table td { padding: 5px 0; word-break: break-word; }
+.scc-cookie-table th, .scc-cookie-table td { border: 1px solid #e7e9ec; padding: 5px 8px; text-align: left; vertical-align: top; }
+.scc-cookie-table th { background: #f9f9fb; }
+/* blocked-content placeholder */
+.scc-blocked { background: #f2f3f5; border: 1px solid #e0e3e7; border-radius: 8px; padding: 22px 24px; margin: 12px 0; text-align: center; font-size: 14px; color: #434549; }
+.scc-blocked-info { margin: 0 0 12px; }
+.scc-blocked-details { text-align: left; background: #fff; border-radius: 6px; padding: 12px 16px; margin: 0 0 12px; }
+.scc-blocked-details p { margin: 0 0 8px; }
+.scc-hint { font-size: 12.5px; color: #6a6d71; }
+.scc-blocked-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+/* widget */
+.scc-widget { position: fixed; left: 16px; bottom: 16px; z-index: 999998; width: 46px; height: 46px; border-radius: 50%; border: 0; background: #86bc25; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,.3); opacity: 0; transform: translateY(8px) scale(.9); transition: opacity .3s ease, transform .3s cubic-bezier(.16, .84, .44, 1), background .15s ease; }
+.scc-widget.scc-in { opacity: 1; transform: none; }
+.scc-widget:hover { background: #6d9a1c; }
+@media (min-width: 640px) {
+  .scc-actions { flex-direction: row; justify-content: center; }
+}
+@media (max-width: 480px) {
+  .scc-dialog { margin-top: 2vh; max-height: 92vh; }
+  .scc-service-list { margin-left: 0; }
+}
+/* Nutzer mit reduzierter Bewegung: sofort ein-/ausblenden ohne Animation */
+@media (prefers-reduced-motion: reduce) {
+  .scc-root, .scc-dialog, .scc-widget { transition: opacity .001s linear !important; transform: none !important; }
+}

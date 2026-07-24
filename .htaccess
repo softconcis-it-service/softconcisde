@@ -1,0 +1,65 @@
+# Softconcis – statische Website mit PHP-Formular-Backend
+Options -Indexes
+AddDefaultCharset UTF-8
+
+# Eigene 404-Seite (Pfad wird für das /softconcis/-Staging von make-dist präfixt)
+ErrorDocument 404 /404.html
+
+# Textressourcen komprimiert ausliefern (Server komprimiert standardmäßig
+# nur HTML — CSS/JS kamen unkomprimiert, z. B. 1,4 MB statt 190 KB)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/css text/javascript application/javascript \
+        application/json application/xml text/xml image/svg+xml text/plain
+</IfModule>
+
+# HTML immer revalidieren (sonst sehen Besucher nach Deploys alte Seiten)
+<IfModule mod_headers.c>
+    <FilesMatch "\.html$">
+        Header set Cache-Control "no-cache, must-revalidate"
+    </FilesMatch>
+    # CSS/JS/Fonts: 1 Jahr + immutable — CSS/JS tragen den Cache-Buster ?v=…,
+    # bei Änderungen zählt der hoch → Browser holt automatisch die neue URL
+    <FilesMatch "\.(css|js|woff2?|ttf|eot|otf)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    # Bilder/Video: 1 Jahr (Dateinamen sind inhaltsspezifisch/datiert)
+    <FilesMatch "\.(png|jpe?g|webp|gif|svg|ico|mp4|avif)$">
+        Header set Cache-Control "public, max-age=31536000"
+    </FilesMatch>
+    # Datei-Änderungszeitpunkt nicht über Header preisgeben.
+    # Unkritisch: HTML ist no-cache, Assets werden per ?v=… gebustet — für
+    # Revalidierung wird Last-Modified/ETag hier ohnehin nicht gebraucht.
+    Header unset Last-Modified
+    Header unset ETag
+</IfModule>
+FileETag None
+
+RewriteEngine On
+
+# API-Endpunkte auf die PHP-Backends umleiten
+# (EN-Seiten nutzen das Präfix /en/)
+RewriteRule ^(?:en/)?api/captcha/v1/challenge$ api/altcha.php [L,QSA]
+RewriteRule ^(?:en/)?api/forms/v1/contact-forms/([0-9]+)/feedback$ api/cf7.php?form=$1 [L,QSA]
+RewriteRule ^(?:en/)?api/forms/v1/contact-forms/([0-9]+)/feedback/schema$ api/cf7-schema.php?form=$1 [L,QSA]
+RewriteRule ^(?:en/)?api/forms/v1/contact-forms/([0-9]+)/refill$ api/cf7-refill.php [L,QSA]
+# Frühere Pfade (Übergang für bereits geöffnete Seiten)
+RewriteRule ^(?:en/)?wp-json/altcha/v1/challenge$ api/altcha.php [L,QSA]
+RewriteRule ^(?:en/)?wp-json/contact-form-7/v1/contact-forms/([0-9]+)/feedback$ api/cf7.php?form=$1 [L,QSA]
+RewriteRule ^(?:en/)?wp-json/contact-form-7/v1/contact-forms/([0-9]+)/feedback/schema$ api/cf7-schema.php?form=$1 [L,QSA]
+RewriteRule ^(?:en/)?wp-json/contact-form-7/v1/contact-forms/([0-9]+)/refill$ api/cf7-refill.php [L,QSA]
+
+# WebCIS-Software liest die Blogposts über den WordPress-REST-Feed.
+# Statische Nachbildung unter derselben URL; ein Query-String wie
+# ?per_page=100 wird ignoriert (der Feed enthält ohnehin alle Beiträge).
+# $1 ist leer (DE) oder "en/" (EN) → passendes JSON.
+RewriteRule ^(en/)?wp-json/wp/v2/posts$ $1wp-json/wp/v2/posts.json [L]
+
+# Newsletter-Double-Opt-In: Bestätigungslink
+RewriteRule ^newsletter-bestaetigung$ api/newsletter-confirm.php [L,QSA]
+
+# Feed für Browser-Consumer freigeben (öffentliche, lesbare Blogliste)
+<IfModule mod_headers.c>
+    <Files "posts.json">
+        Header set Access-Control-Allow-Origin "*"
+    </Files>
+</IfModule>

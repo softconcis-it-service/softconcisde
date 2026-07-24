@@ -1,0 +1,177 @@
+.scf7 .screen-reader-response {
+	position: absolute;
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	word-wrap: normal !important;
+	word-break: normal !important;
+}
+
+.scf7 .hidden-fields-container {
+	display: none;
+}
+
+.scf7 form .scf7-response-output {
+	margin: 2em 0.5em 1em;
+	padding: 0.2em 1em;
+	border: 2px solid #00a0d2; /* Blue */
+}
+
+.scf7 form.init .scf7-response-output,
+.scf7 form.resetting .scf7-response-output,
+.scf7 form.submitting .scf7-response-output {
+	display: none;
+}
+
+.scf7 form.sent .scf7-response-output {
+	border-color: #46b450; /* Green */
+}
+
+.scf7 form.failed .scf7-response-output,
+.scf7 form.aborted .scf7-response-output {
+	border-color: #dc3232; /* Red */
+}
+
+.scf7 form.spam .scf7-response-output {
+	border-color: #f56e28; /* Orange */
+}
+
+.scf7 form.invalid .scf7-response-output,
+.scf7 form.unaccepted .scf7-response-output,
+.scf7 form.payment-required .scf7-response-output {
+	border-color: #ffb900; /* Yellow */
+}
+
+.scf7-form-control-wrap {
+	position: relative;
+}
+
+.scf7-not-valid-tip {
+	color: #dc3232; /* Red */
+	font-size: 1em;
+	font-weight: normal;
+	display: block;
+}
+
+.use-floating-validation-tip .scf7-not-valid-tip {
+	position: relative;
+	top: -2ex;
+	left: 1em;
+	z-index: 100;
+	border: 1px solid #dc3232;
+	background: #fff;
+	padding: .2em .8em;
+	width: 24em;
+}
+
+.scf7-list-item {
+	display: inline-block;
+	margin: 0 0 0 1em;
+}
+
+.scf7-list-item-label::before,
+.scf7-list-item-label::after {
+	content: " ";
+}
+
+.scf7-spinner {
+	visibility: hidden;
+	display: inline-block;
+	background-color: #23282d; /* Dark Gray 800 */
+	opacity: 0.75;
+	width: 24px;
+	height: 24px;
+	border: none;
+	border-radius: 100%;
+	padding: 0;
+	margin: 0 24px;
+	position: relative;
+}
+
+form.submitting .scf7-spinner {
+	visibility: visible;
+}
+
+.scf7-spinner::before {
+	content: '';
+	position: absolute;
+	background-color: #fbfbfc; /* Light Gray 100 */
+	top: 4px;
+	left: 4px;
+	width: 6px;
+	height: 6px;
+	border: none;
+	border-radius: 100%;
+	transform-origin: 8px 8px;
+	animation-name: spin;
+	animation-duration: 1000ms;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.scf7-spinner::before {
+		animation-name: blink;
+		animation-duration: 2000ms;
+	}
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes blink {
+	from {
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 1;
+	}
+
+	to {
+		opacity: 0;
+	}
+}
+
+.scf7 [inert] {
+	opacity: 0.5;
+}
+
+.scf7 input[type="file"] {
+	cursor: pointer;
+}
+
+.scf7 input[type="file"]:disabled {
+	cursor: default;
+}
+
+.scf7 .scf7-submit:disabled {
+	cursor: not-allowed;
+}
+
+.scf7 input[type="url"],
+.scf7 input[type="email"],
+.scf7 input[type="tel"] {
+	direction: ltr;
+}
+
+.scf7-reflection > output {
+	display: list-item;
+	list-style: none;
+}
+
+.scf7-reflection > output[hidden] {
+	display: none;
+}

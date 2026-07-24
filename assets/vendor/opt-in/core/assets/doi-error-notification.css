@@ -1,0 +1,74 @@
+/**
+ * Double Opt-In — Error Notification Toast
+ *
+ * @since 4.2.0
+ */
+
+.doi-error-notification {
+	position: fixed;
+	bottom: 24px;
+	left: 50%;
+	transform: translateX(-50%) translateY(20px);
+	z-index: 999999;
+	max-width: 480px;
+	width: calc(100% - 32px);
+	opacity: 0;
+	transition: opacity 0.3s ease, transform 0.3s ease;
+	pointer-events: none;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.doi-error-notification--visible {
+	opacity: 1;
+	transform: translateX(-50%) translateY(0);
+	pointer-events: auto;
+}
+
+.doi-error-notification--exit {
+	opacity: 0;
+	transform: translateX(-50%) translateY(20px);
+}
+
+.doi-error-notification__content {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	padding: 16px 20px;
+	background: #fff;
+	border: 1px solid #e2e2e2;
+	border-left: 4px solid #d63638;
+	border-radius: 4px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.doi-error-notification__icon {
+	flex-shrink: 0;
+	font-size: 20px;
+	line-height: 1;
+	color: #d63638;
+}
+
+.doi-error-notification__message {
+	flex: 1;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	line-height: 1.5;
+	color: #1e1e1e;
+}
+
+.doi-error-notification__close {
+	flex-shrink: 0;
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 20px;
+	line-height: 1;
+	color: #757575;
+	padding: 0;
+	margin: -4px -4px 0 0;
+}
+
+.doi-error-notification__close:hover {
+	color: #1e1e1e;
+}

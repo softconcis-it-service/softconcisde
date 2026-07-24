@@ -1,0 +1,260 @@
+.scy-ld button span.screen-reader, .longdesc-link span.screen-reader,
+.scy-hide-ltr#skiplinks a, .scy-hide-ltr#skiplinks a:hover, .scy-hide-ltr#skiplinks a:visited,
+.scy-hide-rtl#skiplinks a, .scy-hide-rtl#skiplinks a:hover, .scy-hide-rtl#skiplinks a:visited {
+	border: 0;
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal !important;
+}
+
+.scy-hide-ltr#skiplinks a:focus,
+.scy-hide-rtl#skiplinks a:focus {
+	background-color: #eee;
+	clip-path: none;
+	color: #444;
+	display: block;
+	font-size: 1em;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000; /* Above WP toolbar. */
+}
+
+.scy-alt,
+.scy-ld {
+	display: inline-block;
+	position: relative;
+}
+
+.post-thumbnail .scy-alt,
+.post-thumbnail .scy-ld {
+	display: block;
+}
+
+/* basic support for themes that don't define alignleft and alignright for non-image elements. */
+div.alignleft.scy-alt,
+div.alignleft.scy-ld {
+	float: left;
+}
+
+div.alignright.scy-alt,
+div.alignright.scy-ld {
+	float: right;
+}
+
+div.aligncenter.scy-alt,
+div.aligncenter.scy-ld {
+	display: block;
+	margin: 0 auto;
+	width: fit-content;
+}
+
+.scy-focusable:focus {
+	outline: 1px solid;
+	outline-offset: 1px;
+}
+
+.scy-ld .longdesc {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	overflow-y: scroll;
+	box-sizing: border-box;
+	background: rgba(255, 255, 255, .92);
+	color: #111;
+	padding: 46px 1rem 1rem;
+	text-align: start;
+}
+
+.scy-ld .longdesc,
+.scy-ld .longdesc p {
+	font-size: clamp( 16px, 1rem, 24px );
+}
+
+.scy-ld .longdesc-link {
+	position: absolute;
+	display: inline-block;
+	right: 3px;
+	bottom: 3px;
+	color: #000;
+	background: rgba(255, 255, 255, .92);
+	font-size: clamp( 14px, .875rem, 20px );
+	padding: 2px;
+	border-radius: 3px;
+}
+
+.scy-alt .scy-alt-text {
+	position: absolute;
+	width: calc( 100% - 2em );
+	height: fit-content;
+	bottom: 0;
+	box-sizing: border-box;
+	background: rgba(255, 255, 255, .92);
+	padding: 1rem;
+	margin: 1rem;
+	border-radius: 15px;
+	box-shadow: 0 0 6px #333;
+	text-align: start;
+	z-index: 10;
+	font-size: clamp( 16px, 1rem, 24px );
+	line-height: 1.5;
+	color: #111;
+}
+
+.top-right .scy-alt .scy-alt-text,
+.top-left .scy-alt .scy-alt-text {
+	bottom: auto;
+	top: 0;
+	margin-top: 2.5em;
+}
+
+.rtl .scy-alt .scy-alt-text,
+.rtl .scy-ld .longdesc {
+	text-align: right;
+}
+
+.template-longdesc {
+	text-align: left;
+	line-height: 1.5;
+	width: 100%;
+	max-width: 50em;
+	padding: 2em;
+	margin: 1em auto;
+	background: #fdfdfd;
+	color: #333;
+	box-shadow: 0 0 5px;
+	font-size: 1.4em;
+}
+
+label.scy-screen-reader-text {
+	border: 0;
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal !important;
+}
+
+.scy-content-summary {
+	padding: 30px;
+	background: rgba( 0,0,0,.05 );
+	margin-bottom: 30px;
+}
+
+.scy-content-summary div p:last-of-type {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.scy-excerpt .blk-read-more,
+.scy-excerpt .blk-post-excerpt__more-text {
+	display: none !important;
+}
+
+.scy-excerpt .blk-post-excerpt .continue {
+	margin-top: 1rem;
+	display: block;
+}
+
+.scy-alt button.scy-toggle, .scy-alt a.scy-toggle,
+.scy-ld button.scy-toggle, .scy-ld a.scy-toggle,
+button.scy-video {
+	all: unset;
+	background: #111;
+	display: block;
+	color: #fff;
+	border-radius: 32px !important;
+	height: 28px !important;
+	width: 28px !important;
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	position: absolute !important;
+	z-index: 10;
+	padding: 4px !important;
+	border: 1px solid currentColor !important;
+}
+
+.scy-alt button {
+	font-family: monospace !important;
+	font-size: clamp( 14px,.875rem,20px ) !important;
+}
+
+.scy-alt button.scy-toggle:active,
+.scy-ld button.scy-toggle:active {
+	background: #f6f6f6;
+	color: #111;
+}
+
+.scy-ld button.scy-toggle,
+.scy-alt button.scy-toggle,
+button.scy-video {
+	top: 4px;
+	left: 4px;
+}
+
+.scy-ld button.scy-toggle:focus, .scy-ld button.scy-toggle:hover,
+.scy-alt button.scy-toggle:focus, .scy-alt button.scy-toggle:hover,
+button.scy-video:hover,
+button.scy-video:focus {
+	outline: 2px solid currentColor;
+	outline-offset: 1px;
+}
+
+button.scy-video[aria-pressed=true] .dashicons::before {
+	content: "\f522" / '';
+}
+
+.scy-alt button.scy-toggle[aria-expanded=true],
+.scy-ld button.scy-toggle[aria-expanded=true] {
+	color: #111;
+	background: #f6f6f6;
+}
+
+.scy-alt button:focus, .scy-alt button:hover,
+.scy-ld button:focus, .scy-ld button:hover {
+	cursor: pointer;
+}
+
+.top-left .scy-alt a.scy-toggle, .top-left .scy-alt button.scy-toggle,
+.top-left .scy-ld a.scy-toggle, .top-left .scy-ld button.scy-toggle {
+	top: 4px;
+	bottom: auto;
+}
+
+.top-right .scy-alt a.scy-toggle, .top-right .scy-alt button.scy-toggle,
+.top-right .scy-ld a.scy-toggle, .top-right .scy-ld button.scy-toggle {
+	top: 4px;
+	right: 4px;
+	left: auto;
+	bottom: auto;
+}
+
+.bottom-right .scy-alt a.scy-toggle, .bottom-right .scy-alt button.scy-toggle,
+.bottom-right .scy-ld a.scy-toggle, .bottom-right .scy-ld button.scy-toggle {
+	right: 4px;
+	left: auto;
+}
+
+.scy-alt .scy-ld button {
+	left: 46px;
+}
+
+.top-right .scy-alt .scy-ld button,
+.bottom-right .scy-alt .scy-ld button {
+	left: auto;
+	right: 46px;
+}
