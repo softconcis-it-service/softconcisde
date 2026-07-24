@@ -1,0 +1,42 @@
+name: Aus Sanity bauen und veroeffentlichen
+
+# Publiziert Sanity-Inhalte (softconcis.sanity.studio) auf die Website.
+# Der Generator schreibt die News-/Artikelseiten direkt in das Repo; ein
+# anschliessender Commit stoesst den Deploy-Webhook der Website an.
+on:
+  # Manuell ueber den Actions-Tab
+  workflow_dispatch:
+  # Optional fuer sofortiges Veroeffentlichen: Sanity-Webhook -> repository_dispatch
+  repository_dispatch:
+    types: [sanity-publish]
+  # Regelmaessig pruefen (faengt jeden Publish innerhalb weniger Minuten ein)
+  schedule:
+    - cron: '*/15 * * * *'
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Seiten aus Sanity generieren
+        run: python3 cms/build/generate.py
+
+      - name: Aenderungen committen und veroeffentlichen
+        run: |
+          git config user.name "softconcis-web"
+          git config user.email "web@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine Aenderungen aus Sanity."
+          else
+            git commit -m "Automatische Aktualisierung aus Sanity"
+            git push
+          fi
