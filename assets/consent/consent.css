@@ -72,3 +72,8 @@
 @media (prefers-reduced-motion: reduce) {
   .scc-root, .scc-dialog, .scc-widget { transition: opacity .001s linear !important; transform: none !important; }
 }
+
+/* HubSpot-Chat unter das Consent-Overlay legen (HubSpot setzt sonst z-index:2147483647).
+   Hohe Spezifitaet + !important, um HubSpots dynamisch injiziertes Stylesheet zu ueberschreiben.
+   999990 < .scc-root (999999) -> bei offenem Cookie-Dialog liegt nur der Dialog oben. */
+html body #hubspot-messages-iframe-container { z-index: 999990 !important; }
